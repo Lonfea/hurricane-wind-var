@@ -1,50 +1,72 @@
-# Estimating Hurricane Wind Value-at-Risk from an AI Weather Ensemble
+# Hurricane Wind Value-at-Risk from an AI Weather Ensemble
 
-Hurricanes are among the costliest natural disasters on Earth, and the financial institutions that insure homes, hold mortgages, or invest in coastal regions need forward-looking, quantified estimates of the losses a storm might cause — before it makes landfall, sometimes before it even has a name.
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Climate Risk](https://img.shields.io/badge/Climate%20Risk-Catastrophe%20Modeling-2E8B57)](https://www.climatechange.ai/)
+[![Geospatial](https://img.shields.io/badge/Analysis-Geospatial-4C8CBF)](https://geopandas.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-In this tutorial you will turn an ensemble of AI-generated hurricane forecasts (Google's experimental WeatherNext cyclone model, 50 members, for the system that became Hurricane Helene, 2024) into a county-level Climate Value-at-Risk for single-family-home wind damage across Florida, Georgia, South Carolina, and North Carolina.
+An end-to-end catastrophe-risk workflow that converts a 50-member AI hurricane forecast ensemble into county-level **wind-damage Value-at-Risk (VaR)** estimates for single-family homes in Florida, Georgia, South Carolina, and North Carolina.
 
-We follow the standard catastrophe-modeling chain — hazard → exposure → vulnerability → loss — running it once per ensemble member to build a distribution of possible losses per county, then reading a percentile off that distribution: the Value-at-Risk.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Lonfea/hurricane-wind-var/blob/main/Hurricane_Wind_VaR.ipynb)
 
-Author:
-- Tristan Ballard, PhD | Zeus AI
+## Why this project matters
 
-## Access this tutorial
+Insurers, mortgage holders, governments, and coastal investors need quantified estimates of potential storm losses before landfall. A single deterministic forecast hides important uncertainty. Ensemble forecasts instead produce a distribution of plausible outcomes, allowing decision-makers to evaluate tail risk rather than relying on one scenario.
 
-We recommend executing this notebook in a Colab environment to gain access to GPUs and to manage all necessary dependencies. 
+## Modeling chain
 
-<a target="_blank" href="https://colab.research.google.com/github/climatechange-ai-tutorials/hurricane-wind-var/blob/main/Hurricane_Wind_VaR.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-
-## Contribute to this tutorial
-
-Please refer to these [GitHub instructions](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project#about-forking) to open a pull request via the "fork and pull request" workflow.
-
-Pull requests will be reviewed by members of the Climate Change AI Tutorials team for relevance, accuracy, and conciseness.
-
-## Climate Change AI Tutorials
-Check out the [tutorials page](https://www.climatechange.ai/tutorials?) on our website for a full list of tutorials demonstrating how AI can be used to tackle problems related to climate change.
-
-## License
-Usage of this tutorial is subject to the MIT License.
-
-## Cite
-
-### Plain Text
-Ballard, T. (2026). Estimating Hurricane Wind Value-at-Risk from an AI Weather Ensemble [Tutorial]. In Climate Change AI Summer School. Climate Change AI. https://doi.org/10.5281/zenodo.21828317
-
-### BibTeX
-
+```text
+AI forecast ensemble → wind hazard → property exposure → vulnerability → loss distribution → Value-at-Risk
 ```
+
+The analysis uses Google's experimental WeatherNext cyclone ensemble for the system that became Hurricane Helene in 2024. Each ensemble member passes independently through the catastrophe-modeling chain, producing a distribution of possible county losses.
+
+## Project workflow
+
+1. Load and inspect the 50-member hurricane forecast ensemble.
+2. Transform forecast data into county-level wind hazard.
+3. combine hazard with residential property exposure.
+4. Apply vulnerability relationships to estimate wind damage.
+5. Aggregate losses geographically.
+6. Calculate and visualize percentile-based Value-at-Risk.
+
+## Skills demonstrated
+
+- Probabilistic weather and ensemble analysis
+- Climate-risk and catastrophe modeling
+- Geospatial joins and county-level aggregation
+- Exposure, vulnerability, and loss modeling
+- Tail-risk communication for financial decisions
+
+## Responsible interpretation
+
+This educational model simplifies real catastrophe-risk systems. Its estimates are scenario-dependent and should not be used for underwriting, investment, emergency management, or public-safety decisions without professional validation and higher-quality exposure and vulnerability data.
+
+## Portfolio note and provenance
+
+This repository is my portfolio fork and study implementation of a **Climate Change AI** tutorial. The original notebook, methodology, and scientific content are credited to the creator below.
+
+### Original creator
+
+- Tristan Ballard, PhD — Zeus AI
+
+## Citation
+
+Ballard, T. (2026). *Estimating Hurricane Wind Value-at-Risk from an AI Weather Ensemble* [Tutorial]. Climate Change AI Summer School. https://doi.org/10.5281/zenodo.21828317
+
+```bibtex
 @misc{ballard2026hurricane,
   title={Estimating Hurricane Wind Value-at-Risk from an AI Weather Ensemble},
   author={Ballard, Tristan},
   year={2026},
   organization={Climate Change AI},
   type={Tutorial},
-  doi={https://doi.org/10.5281/zenodo.21828317},
+  doi={10.5281/zenodo.21828317},
   booktitle={Climate Change AI Summer School},
   howpublished={\url{https://github.com/climatechange-ai-tutorials/hurricane-wind-var}}
 }
 ```
+
+## License
+
+Released under the [MIT License](LICENSE).
