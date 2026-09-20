@@ -25,7 +25,7 @@ The analysis uses Google's experimental WeatherNext cyclone ensemble for the sys
 
 1. Load and inspect the 50-member hurricane forecast ensemble.
 2. Transform forecast data into county-level wind hazard.
-3. combine hazard with residential property exposure.
+3. Combine hazard with residential property exposure.
 4. Apply vulnerability relationships to estimate wind damage.
 5. Aggregate losses geographically.
 6. Calculate and visualize percentile-based Value-at-Risk.
